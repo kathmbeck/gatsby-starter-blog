@@ -27,7 +27,7 @@ const Bio = () => {
   `)
 
   const localData = useStaticQuery(graphql`
-  query{
+  query LocalImageQuery {
     file(relativePath: {eq: "profile-pic.png"}) {
       childImageSharp {
         gatsbyImageData(
