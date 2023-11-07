@@ -7,7 +7,7 @@
 
 import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { GatsbyImage, GatsbyImageImage } from "gatsby-plugin-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const Bio = () => {
   const data = useStaticQuery(graphql`
@@ -26,20 +26,30 @@ const Bio = () => {
     }
   `)
 
+  const localData = useStaticQuery(graphql`
+  query{
+    file(relativePath: {eq: "profile-pic.png"}) {
+      childImageSharp {
+        gatsbyImageData(
+          width: 50
+          height: 50
+          quality: 95
+          layout: FIXED
+        )
+      }
+    }
+  }
+`)
+
   // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author
   const social = data.site.siteMetadata?.social
+  const image = getImage(localData.file.childImageSharp.gatsbyImageData)
 
   return (
     <div className="bio">
       <GatsbyImage
-        className="bio-avatar"
-        layout="fixed"
-        formats={["auto", "webp", "avif"]}
-        src="../images/profile-pic.png"
-        width={50}
-        height={50}
-        quality={95}
+        image={image}
         alt="Profile picture"
       />
       {author?.name && (
