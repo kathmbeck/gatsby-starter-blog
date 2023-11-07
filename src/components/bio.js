@@ -23,23 +23,18 @@ const Bio = () => {
           }
         }
       }
-    }
-  `)
-
-  const localData = useStaticQuery(graphql`
-  query LocalImageQuery {
-    file(relativePath: {eq: "profile-pic.png"}) {
-      childImageSharp {
-        gatsbyImageData(
-          width: 50
-          height: 50
-          quality: 95
-          layout: FIXED
-        )
+      file(relativePath: {eq: "profile-pic.png"}) {
+        childImageSharp {
+          gatsbyImageData(
+            width: 50
+            height: 50
+            quality: 95
+            layout: FIXED
+          )
+        }
       }
     }
-  }
-`)
+  `)
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author
