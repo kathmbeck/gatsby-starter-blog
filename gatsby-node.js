@@ -113,3 +113,23 @@ exports.createSchemaCustomization = ({ actions }) => {
     }
   `)
 }
+
+  const publicPath = path.join(__dirname, 'public');
+  const filePath = path.join(publicPath, 'image_config.json');
+
+  const imageConfig = {
+    images: {
+      remote_images: ["https://example.com/.*"]
+    }
+  };
+
+  // Write the JSON file
+  fs.writeFile(filePath, JSON.stringify(imageConfig, null, 2), err => {
+    if (err) {
+      reporter.error("Error writing image_config.json", err);
+    } else {
+      reporter.info("Successfully wrote image_config.json");
+    }
+  });
+};
+
